@@ -1,0 +1,148 @@
+var link = window.location.href;
+var regex = RegExp("/([a-zA-Z0-9]{10})(?:[/?]|$)");
+let m = link.match(regex);
+console.log({match: m[1]})
+
+// if(document.getElementById("form")) {
+// 	console.log("submit form")
+// 	document.getElementById("form").submit();
+
+// }
+;(async () => {
+
+
+
+// 	let insertEl = document.querySelector("#ppd");
+// 	let newEl = document.createElement('div');
+// 	newEl.id = "embed";
+// 	newEl.style.width = '100%';
+// 	newEl.style.height = '80vh';
+// 	insertEl.after(newEl)
+// 	newEl.innerHTML = `
+// <form id="form" action="https://public.domo.com/cards/E8mXk" method="post">
+// 	<input type="hidden" name="embedToken" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNDY3NjQ1OTE1IiwibmJmIjoxNzMzNDA1NzY0LCJkb20iOiJiaXVzZXJzLmRvbW8uY29tIiwiaXNzIjoiYXBpRW1iZWQiLCJlbWIiOlsie1widG9rZW5cIjpcIkU4bVhrXCIsXCJsaW5rVHlwZVwiOlwiUFJJVkFURVwiLFwicGVybWlzc2lvbnNcIjpbXCJGSUxURVJcIixcIlJFQURcIixcIkVYUE9SVFwiXSxcInNxbEZpbHRlcnNcIjpbe1wic3FsRmlsdGVyXCI6XCJgKENoaWxkKSBBU0lOYCBJTiAoJ0IwQlc2UDlSRjInKVwiLFwiZGF0YXNvdXJjZUlkc1wiOltdfV19Il0sImV4cCI6MTczMzQzNDU3NCwiaWF0IjoxNzMzNDA1Nzc0LCJqdGkiOiI2ZDcwOTdjYy1kYmNhLTQ3YmUtOTVmNi1jZWIzMGRhZTA4NTAifQ.jqN0oLUnGabxWMfye759J3GDkIZ23otSBWWxp_NX7eY">
+// </form>
+// 	`
+// 	if(document.querySelector('#form')) {
+// 		document.querySelector('#form').submit()
+// 	}
+
+	// let form = new FormData();
+	// form.append('asin', m[1])
+	// // let url = `https://julven.epizy.com/domo_embed/server.php`
+	// let url = `http://98.81.221.134:80/server.php`	
+	// let resp = await fetch(url, {
+	// 	method: "POST",	
+	// 	body: form,
+		
+	// })
+
+	// let resp = await fetch('https://randomuser.me/api/')
+
+	// resp = await resp.json()
+
+	// resp = await resp.text()
+
+	// console.log({resp})
+	// // insertEl.after(resp)
+	// document.querySelector("#embed").innerHTML = resp;
+	// if(document.querySelector('#form')) {
+
+	// 	 document.getElementById("form").submit();
+	// }
+	
+})()
+let insertEl = document.querySelector("#ppd")
+console.log({insertEl})
+let newEl = document.createElement('iframe')
+
+
+// <iframe src="https://biusers.domo.com/embed/card/private/D9g1y" width="600" height="600" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+// let url = `https://embed.domo.com/cards/K1vzR?appData=${m.join(",")}`	
+// <iframe src="https://embed.domo.com/cards/E8mXk" width="600" height="600" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+// let url = `https://embed.domo.com/cards/E8mXk?appData=${m[1] || null	}`;
+// <iframe src="https://biusers.domo.com/embed/card/private/K1vzR" width="600" height="600" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+// let url = `https://biusers.domo.com/embed/card/private/K1vzR?pfilters=[{"column":"(Child) ASIN","operand":"IN","values":["${m[1]}"]}]`
+// url = encodeURI(url) 
+// console.log({url})
+// nxNvp
+let url = `https://biusers.domo.com/embed/card/private/nxNvp?pfilters=[{"column":"(Child) ASIN","operand":"IN","values":["${m[1]}"]}]`
+url = encodeURI(url) 
+console.log({url})
+
+// let url = `https://julven.epizy.com/domo_embed/server.php?asin=${m[1]}`
+
+newEl.src = url
+newEl.setAttribute('sandbox', "allow-same-origin allow-scripts allow-popups allow-forms")
+newEl.style.width = '100%';
+newEl.style.height = '80vh';
+
+// newEl.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+// newEl.outerHTML = `<iframe src="https://embed.domo.com/cards/K1vzR" width="900" height="600" marginheight="0" marginwidth="0" frameborder="0"></iframe>`
+// newEl.style.fontWeight = "bold";	
+
+// insertEl.appendChild(newEl)
+insertEl.after(newEl);	
+
+
+#######################
+
+// document.cookie = "SameSite=None; Secure";
+
+
+// let link = window.location.href;
+// let regex = RegExp("/([a-zA-Z0-9]{10})(?:[/?]|$)");
+// let m = link.match(regex);
+// console.log({match: m[1]})
+
+// let insertEl = document.querySelector("#ppd")
+// // console.log({insertEl})
+// let newEl = document.createElement('iframe')
+
+// let url = `https://biusers.domo.com/embed/card/private/nxNvp?pfilters=[{"column":"(Child) ASIN","operand":"IN","values":["${m[1]}"]}]`
+// url = encodeURI(url) 
+// console.log({url})
+
+
+// newEl.src = url
+// newEl.setAttribute('sandbox', "allow-same-origin allow-scripts allow-popups allow-forms")
+// newEl.style.minWidth = '800px';
+
+// newEl.style.minHeight = '550px';
+
+
+// insertEl.after(newEl);	
+
+
+#####################
+
+;( async() => {
+
+
+	// let url = `http://localhost:3000/hello`;
+	let url = "https://jg7u2upo2udattxsajfylgh6ma0uobry.lambda-url.us-east-1.on.aws/hello"
+	let resp = await fetch(url, {
+		method: "POST",
+		headers: (() => {
+            let header = new Headers();
+            header.append("Content-Type", `application/json`);
+            header.append("Accept", `*/*`);
+            return header
+        })(),
+		body: JSON.stringify({asin: m[1]})
+	})
+
+	resp = await resp.json()
+
+	console.log({resp})
+
+	let insertEl = document.querySelector("#ppd")
+	// console.log({insertEl})
+	let newEl = document.createElement('iframe')
+	newEl.srcdoc = resp
+	newEl.style.minWidth = '800px';
+	newEl.style.minHeight = '550px';
+
+	insertEl.after(newEl);	
+
+}) ()

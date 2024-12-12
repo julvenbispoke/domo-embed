@@ -1,0 +1,16 @@
+{
+  "name": "Append Test Text",
+  "description": "Add test123 to body",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.amazon.com/*","https://julven.epizy.com/*"],
+      "js": ["index.js"]
+    }
+  ],
+
+  "manifest_version": 3
+}
