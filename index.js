@@ -1,93 +1,41 @@
-console.clear()
+// console.clear()
 let exists = null
 let client = null
 let link = window.location.href;
 let regex = RegExp("/([a-zA-Z0-9]{10})(?:[/?]|$)");
 let m = link.match(regex);
 // console.log({match: m[1]})
-
-let createInputEl = (exists) => {
-	let idInput = [
-	
-		`<input type="number" id="embed-client-id"/>`,
-		`<button type="submit" id="embed-submit">submit</button>`,
-		((exists, client) => {
-			if(exists==true) {
-				return `<p>client ID EXISTS: ${client} </p>`
-			}
-			else return ""
-		})(exists, client),
-		((exists, client) => {
-			if(exists==false) {
-				return `<p>client ID  NOT FOUND: ${client} </p>`
-			}
-			else return ""
-		})(exists, client),
-		].join(" ");
-
-	return idInput
-}
-
-
-
-
-
 let insertEl = document.querySelector("#ppd")
 
-const submitForm = async (value) => {
-	exists = null;
-	if(!value) {
-		console.log("no id value")
-		return
-	}
+chrome.storage.onChanged.addListener((changes, area) => {
+ 	console.log({changes, area})
+ 	loadClientId()
+});
 
-	console.log({value})
+// chrome.storage.sync.clear()
 
-	let resp = await fetch(`https://jg7u2upo2udattxsajfylgh6ma0uobry.lambda-url.us-east-1.on.aws/domo_search_client_id`, {
-		method: "POST",
-		headers: (() => {
-			const header = new Headers();
-			header.append("Content-Type", "application/json");
-			return header;
-		})(),
-		body: JSON.stringify({id: value}),
-		
-	})
 
-	resp = await resp.json()
-
-	
-	if(resp.length == 0) {
-		console.log("no result")
-		exists = false
-		updateDoc()
-		return
-	}
-	console.log({resp})
-	exists = true;
-	updateDoc()
-	loadIframe(	)
-}
-
-let updateDoc = () => {
-	console.log({exists, inputEl: createInputEl(exists)})
+const loadClientId = async () => {
 	try {
-		console.log("removing document element")
-		document.querySelector('#domo-form').remove()
-	} catch (err) {
-		console.log("ERR "+err)
+		const data = await chrome.storage.sync.get(null);
+		console.log({data})
+		if("clientId" in data && isFinite(data.clientId)) {
+			loadIframe()
+		}
+		else {
+			document.querySelector("#domo-iframe").remove()
+		}
 	}
-	let form = document.createElement('div')
-	form.id = "domo-form"
-	form.innerHTML = createInputEl(exists);
-	insertEl.after(form)
-	document.querySelector('#embed-submit').addEventListener('click', (e) => {
-		// console.log(document.querySelector("#embed-client-id").value)
-		let value = document.querySelector("#embed-client-id").value;
-		client = value
-		submitForm(value)
-	})
+	catch( err ) {
+		console.log("ERR: "+err)
+	}
+
+	return;
 }
+
+
+loadClientId()
+
 
 let loadIframe = async() => {
 
@@ -120,6 +68,7 @@ let loadIframe = async() => {
 	let insertEl = document.querySelector("#ppd")
 	// console.log({insertEl})
 	let newEl = document.createElement('iframe')
+	newEl.id = 'domo-iframe';
 	newEl.srcdoc = resp
 	newEl.style.minWidth = '100%';
 	newEl.style.minHeight = '600px';
@@ -131,8 +80,6 @@ let loadIframe = async() => {
 
 
 
-
-updateDoc()
 
 
 

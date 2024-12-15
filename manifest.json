@@ -2,15 +2,27 @@
   "name": "Append Test Text",
   "description": "Add test123 to body",
   "version": "1.0",
+
   "permissions": [
-    "activeTab"
+    "activeTab","scripting","tabs","storage","sidePanel"
   ],
+  "action": {
+    // "default_popup": "index.html"
+    "default_title": "Click to open panel"
+  },
+  // "side_panel": {
+  //   "default_path": "index.html"
+  // },
   "content_scripts": [
     {
       "matches": ["https://www.amazon.com/*","https://julven.epizy.com/*"],
-      "js": ["index.js"]
+      "js": ["index.js", "init.js"]
     }
   ],
+  "background": {
+    // "scripts": ["background.js"]
+    "service_worker": "background.js"
+  },
 
   "manifest_version": 3
 }
